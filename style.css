@@ -69,6 +69,10 @@ body {
     border: r;
 }
 
+/* #GetPuzzle:disabled {
+    color: gray;
+} */
+
 #GetPuzzle,
 #SolvePuzzle {
 
@@ -155,7 +159,7 @@ body {
     }
 }
 
-#GetPuzzle:hover,
+#GetPuzzle:hover:not(:disabled),
 #SolvePuzzle:hover {
     filter: brightness(110%);
     -webkit-filter: brightness(110%);
@@ -190,6 +194,34 @@ body {
 #GetPuzzle:focus:not(:focus-visible),
 #SolvePuzzle:focus:not(:focus-visible) {
     outline: none;
+}
+
+
+
+
+#GetPuzzle:disabled .button-82-front,
+#SolvePuzzle:disabled .button-82-front {
+    transform: translateY(-0px);
+    transition: transform 34ms;
+    background-color: gainsboro;
+    color: gray;
+    border: 2px solid gainsboro;
+    cursor: wait;
+}
+
+#GetPuzzle[disabled]:hover .button-82-front,
+#SolvePuzzle[disabled]:hover .button-82-front {
+    background-color: gainsboro;
+    color: gray;
+    border: 2px solid gainsboro;
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+    cursor: wait;
+}
+
+#GetPuzzle:disabled .button-82-shadow,
+#SolvePuzzle:disabled .button-82-shadow {
+    display: none;
 }
 
 /* 
