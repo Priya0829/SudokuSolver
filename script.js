@@ -48,20 +48,49 @@ function clear_color(board) {
 let GetPuzzle = document.getElementById('GetPuzzle')
 let SolvePuzzle = document.getElementById('SolvePuzzle')
 
+// GetPuzzle.onclick = function () {
+
+// 	var xhrRequest = new XMLHttpRequest()
+// 	xhrRequest.onload = function () {
+// 		var response = JSON.parse(xhrRequest.response)
+// 		console.log(response)
+// 		board = response.board
+// 		FillBoard(board)
+// 		clear_color(board)
+// 		fill_color_when_generate(board)
+// 	}
+// 	xhrRequest.open('get', 'https://sugoku.onrender.com/board?difficulty=easy')
+// 	//we can change the difficulty of the puzzle the allowed values of difficulty are easy, medium, hard and random
+// 	xhrRequest.send()
+// }
+
 GetPuzzle.onclick = function () {
-	var xhrRequest = new XMLHttpRequest()
+	// Disable the button
+	GetPuzzle.disabled = true;
+
+	var xhrRequest = new XMLHttpRequest();
 	xhrRequest.onload = function () {
-		var response = JSON.parse(xhrRequest.response)
-		console.log(response)
-		board = response.board
-		FillBoard(board)
-		clear_color(board)
-		fill_color_when_generate(board)
-	}
-	xhrRequest.open('get', 'https://sugoku.onrender.com/board?difficulty=easy')
-	//we can change the difficulty of the puzzle the allowed values of difficulty are easy, medium, hard and random
-	xhrRequest.send()
-}
+		var response = JSON.parse(xhrRequest.response);
+		console.log(response);
+		board = response.board;
+		FillBoard(board);
+		clear_color(board);
+		fill_color_when_generate(board);
+
+		// Re-enable the button after the request is complete
+		GetPuzzle.disabled = false;
+	};
+
+	xhrRequest.onerror = function () {
+		console.error('Request failed.');
+		// Re-enable the button if the request fails
+		GetPuzzle.disabled = false;
+	};
+
+	xhrRequest.open('get', 'https://sugoku.onrender.com/board?difficulty=easy');
+	// we can change the difficulty of the puzzle; the allowed values are easy, medium, hard, and random
+	xhrRequest.send();
+};
 
 SolvePuzzle.onclick = () => {
 	SudokuSolver(board, 0, 0, 9);
