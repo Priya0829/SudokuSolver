@@ -72,7 +72,7 @@ GetPuzzle.onclick = function () {
 	xhrRequest.onload = function () {
 		var response = JSON.parse(xhrRequest.response);
 		console.log(response);
-		board = response.board;
+		board = response.newboard.grids[0].value;
 		FillBoard(board);
 		clear_color(board);
 		fill_color_when_generate(board);
@@ -87,7 +87,7 @@ GetPuzzle.onclick = function () {
 		GetPuzzle.disabled = false;
 	};
 
-	xhrRequest.open('get', 'https://sugoku.onrender.com/board?difficulty=easy');
+	xhrRequest.open('get', 'https://sudoku-api.vercel.app/api/dosuku');
 	// we can change the difficulty of the puzzle; the allowed values are easy, medium, hard, and random
 	xhrRequest.send();
 };
